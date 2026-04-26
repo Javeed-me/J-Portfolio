@@ -1,8 +1,6 @@
 import { motion, useMotionValue, useSpring } from "framer-motion";
-import { FloatingIcons } from "@/components/3d/FloatingIcons";
 import { GlowButton } from "@/components/ui/GlowButton";
 import { FadeUp } from "@/components/layout/PageTransition";
-import { ArrowDown, Sparkles } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 
@@ -27,51 +25,39 @@ const Hero = () => {
   }, [cursorX, cursorY]);
 
   return (
-    <section className="relative min-h-screen flex items-center overflow-hidden">
-      {/* 3D Floating Icons */}
-      <div className="absolute inset-0 opacity-60">
-        <FloatingIcons />
-      </div>
-
+    <section className="relative h-screen flex items-center justify-center overflow-hidden">
       {/* Parallax effect on content */}
       <motion.div
-        className="container mx-auto px-6 lg:px-12 relative z-10"
+        className="container mx-auto px-6 lg:px-12 relative z-10 w-full"
         style={{
-          x: useSpring(mousePosition.x * 0.02 - 20, springConfig),
-          y: useSpring(mousePosition.y * 0.02 - 20, springConfig),
+          x: useSpring(mousePosition.x * 0.01, springConfig),
+          y: useSpring(mousePosition.y * 0.01, springConfig),
         }}
       >
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
+        <div className="grid lg:grid-cols-2 gap-8 sm:gap-6 items-center justify-items-center w-full">
           {/* Text Content */}
           <div className="order-2 lg:order-1">
-            <FadeUp delay={0.2}>
-              <motion.div
-                className="inline-flex items-center gap-2 glass px-4 py-2 rounded-full mb-6"
-                whileHover={{ scale: 1.05 }}
-              >
-                <Sparkles className="w-4 h-4 text-primary" />
-                <span className="text-sm font-medium">Available for work</span>
-              </motion.div>
-            </FadeUp>
-
             <FadeUp delay={0.3}>
-              <h1 className="font-display text-5xl md:text-7xl font-bold leading-tight mb-6">
-                Hi, I'm{" "}
-                <span className="gradient-text-warm">Creative</span>
-                <br />
-                Developer
-              </h1>
+              <div>
+                <h1 className="font-display text-lg sm:text-2xl md:text-3xl lg:text-4xl font-bold leading-tight">
+                  Hi, I'm{" "}
+                  <span className="gradient-text-warm">Jaaveed</span>
+                </h1>
+                <h2 className="font-display text-xl sm:text-2xl md:text-5xl lg:text-6xl font-bold leading-tight mb-4">
+                  A Creative Developer
+                </h2>
+              </div>
             </FadeUp>
 
             <FadeUp delay={0.4}>
-              <p className="text-lg md:text-xl text-muted-foreground max-w-lg mb-8 leading-relaxed">
-                I craft immersive digital experiences through code, design, and creativity. 
-                Specializing in full-stack development with a passion for stunning interfaces.
+              <p className="text-sm sm:text-base md:text-lg text-muted-foreground max-w-lg mb-6 leading-relaxed">
+                I craft immersive digital products through code, design, and creativity.
+                Specializing in Software development with a passion for stunning interfaces.
               </p>
             </FadeUp>
 
             <FadeUp delay={0.5}>
-              <div className="flex flex-wrap gap-4">
+              <div className="flex flex-wrap gap-4 justify-center lg:justify-start">
                 <Link to="/projects">
                   <GlowButton size="lg">
                     View My Work
@@ -84,79 +70,70 @@ const Hero = () => {
                 </Link>
               </div>
             </FadeUp>
-
-            {/* Stats */}
-            <FadeUp delay={0.6}>
-              <div className="flex gap-12 mt-12">
-                {[
-                  { value: "5+", label: "Years Experience" },
-                  { value: "50+", label: "Projects Done" },
-                  { value: "30+", label: "Happy Clients" },
-                ].map((stat, i) => (
-                  <motion.div
-                    key={stat.label}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.7 + i * 0.1 }}
-                  >
-                    <div className="font-display text-3xl font-bold gradient-text">
-                      {stat.value}
-                    </div>
-                    <div className="text-sm text-muted-foreground">{stat.label}</div>
-                  </motion.div>
-                ))}
-              </div>
-            </FadeUp>
           </div>
 
           {/* Visual Side */}
-          <div className="order-1 lg:order-2 relative">
+          <div className="order-1 lg:order-2 relative w-full h-96 flex items-center justify-center">
+            {/* Floating Badges - Orbiting
+            <motion.div
+              className="absolute inset-0 flex items-center justify-center pointer-events-none"
+              animate={{ rotate: 360 }}
+              transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+            >
+              {["React", "Three.js", "AWS", "UI/UX"].map((skill, i) => {
+                const angle = (i / 4) * Math.PI * 2;
+                const radius = 180;
+                const x = Math.cos(angle) * radius;
+                const y = Math.sin(angle) * radius;
+                return (
+                  <motion.div
+                    key={skill}
+                    className="absolute glass px-3 py-1.5 rounded-full text-xs font-semibold border border-primary/50 bg-primary/10 whitespace-nowrap"
+                    style={{
+                      left: `calc(55% + ${x}px)`,
+                      top: `calc(55% + ${y}px)`,
+                      transform: "translate(-50%, -50%)",
+                    }}
+                    animate={{ scale: [1, 1.15, 1] }}
+                    transition={{ duration: 2, repeat: Infinity, delay: i * 0.3 }}
+                  >
+                    {skill}
+                  </motion.div>
+                );
+              })}
+            </motion.div> */}
+
+            {/* Profile Image Box */}
             <motion.div
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 1, delay: 0.3 }}
-              className="relative"
+              className="relative z-10"
             >
-              {/* Glow behind image area */}
-              <div className="absolute inset-0 glow-primary rounded-3xl blur-3xl opacity-30" />
-              
-              {/* Placeholder for profile visual */}
+              {/* Glow */}
+              <div className="absolute -inset-12 glow-primary rounded-3xl blur-3xl opacity-40" />
+
+              {/* Image Container */}
               <motion.div
-                className="relative glass rounded-3xl p-8 aspect-square max-w-md mx-auto overflow-hidden"
-                whileHover={{ scale: 1.02 }}
+                className="relative rounded-4xl p-1 w-96 h-96 overflow-hidden"
+                whileHover={{ scale: 1.03 }}
                 transition={{ type: "spring", stiffness: 300 }}
               >
-                <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-accent/10 to-transparent" />
-                <div className="relative z-10 h-full flex flex-col items-center justify-center text-center">
-                  <motion.div
-                    className="w-32 h-32 rounded-full bg-gradient-to-br from-primary to-accent mb-6"
-                    animate={{ rotate: 360 }}
-                    transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                {/* Gradient Border */}
+                <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-primary via-accent to-primary opacity-80" />
+
+                {/* Image */}
+                <div className="absolute inset-1 rounded-3xl bg-background overflow-hidden">
+                  <img
+                    src="/images/myimage.png"
+                    alt="Profile"
+                    className="w-full h-full object-cover"
                   />
-                  <span className="text-2xl font-display font-bold">Your Photo</span>
-                  <span className="text-muted-foreground">Replace with your image</span>
                 </div>
               </motion.div>
             </motion.div>
           </div>
         </div>
-      </motion.div>
-
-      {/* Scroll indicator */}
-      <motion.div
-        className="absolute bottom-8 left-1/2 -translate-x-1/2"
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 1, duration: 0.8 }}
-      >
-        <motion.div
-          animate={{ y: [0, 10, 0] }}
-          transition={{ duration: 2, repeat: Infinity }}
-          className="flex flex-col items-center gap-2 text-muted-foreground"
-        >
-          <span className="text-sm">Scroll to explore</span>
-          <ArrowDown className="w-5 h-5" />
-        </motion.div>
       </motion.div>
     </section>
   );
@@ -164,44 +141,46 @@ const Hero = () => {
 
 const About = () => {
   return (
-    <section className="py-24 relative">
+    <section className="py-6 relative -mt-20">
       <div className="container mx-auto px-6 lg:px-12">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
-          {/* About content */}
-          <div>
+        <div className="flex justify-center">
+          <div className="max-w-4xl w-full px-4 mx-auto">
             <FadeUp>
-              <span className="text-primary font-display font-semibold mb-4 block">
+              <span className="text-primary font-display font-semibold mb-2 block text-lg">
                 About Me
               </span>
             </FadeUp>
 
             <FadeUp delay={0.1}>
-              <h2 className="font-display text-4xl md:text-5xl font-bold mb-6">
-                Passionate About Creating{" "}
-                <span className="gradient-text">Digital Excellence</span>
+              <h2 className="font-display font-bold mb-4">
+                <span className="block text-xl sm:text-3xl ">
+                  Passionate About Creating
+                </span>
+                <span className="block gradient-text text-2xl sm:text-3xl md:text-4xl lg:text-5xl">
+                  Software Products
+                </span>
               </h2>
             </FadeUp>
 
             <FadeUp delay={0.2}>
-              <p className="text-lg text-muted-foreground mb-6 leading-relaxed">
-                I'm a full-stack developer with 5+ years of experience building 
-                web applications that not only work flawlessly but also look stunning. 
-                My journey started with a curiosity for how things work and evolved 
+              <p className="text-sm sm:text-base md:text-base text-muted-foreground mb-4 leading-relaxed">
+                I'm a Software developer building
+                web applications that not only work flawlessly but also look stunning.
+                My journey started with a curiosity for how things work and evolved
                 into a passion for creating impactful digital experiences.
               </p>
             </FadeUp>
 
             <FadeUp delay={0.3}>
-              <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
-                When I'm not coding, you'll find me exploring new technologies, 
-                contributing to open-source projects, or sharing knowledge through 
-                technical articles and mentoring.
+              <p className="text-sm sm:text-base md:text-base text-muted-foreground mb-4 leading-relaxed">
+                When I'm not coding, you'll find me exploring new technologies,
+                pitching new ideas of projects, or studying latest tech.
               </p>
             </FadeUp>
 
             <FadeUp delay={0.4}>
               <div className="flex flex-wrap gap-3">
-                {["React", "TypeScript", "Node.js", "Three.js", "Python", "AWS"].map((skill, i) => (
+                {["Python", "React", "JavaScript", "Node.js", "Mongodb", "Web-Security", "SQL", "API"].map((skill, i) => (
                   <motion.span
                     key={skill}
                     className="glass px-4 py-2 rounded-full text-sm font-medium"
@@ -215,36 +194,6 @@ const About = () => {
                 ))}
               </div>
             </FadeUp>
-          </div>
-
-          {/* Achievements */}
-          <div className="grid grid-cols-2 gap-4">
-            {[
-              { icon: "🎓", title: "Computer Science", subtitle: "B.Tech Graduate" },
-              { icon: "🏆", title: "Award Winner", subtitle: "Hackathon Champion" },
-              { icon: "💼", title: "Industry Expert", subtitle: "5+ Years Experience" },
-              { icon: "🌟", title: "Open Source", subtitle: "500+ Contributions" },
-            ].map((item, i) => (
-              <motion.div
-                key={item.title}
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3 + i * 0.15 }}
-                whileHover={{ scale: 1.05, y: -5 }}
-                className="glass rounded-2xl p-6 text-center group cursor-pointer"
-              >
-                <motion.div
-                  className="text-4xl mb-4"
-                  whileHover={{ scale: 1.2, rotate: 10 }}
-                >
-                  {item.icon}
-                </motion.div>
-                <h4 className="font-display font-semibold mb-1 group-hover:text-primary transition-colors">
-                  {item.title}
-                </h4>
-                <p className="text-sm text-muted-foreground">{item.subtitle}</p>
-              </motion.div>
-            ))}
           </div>
         </div>
       </div>

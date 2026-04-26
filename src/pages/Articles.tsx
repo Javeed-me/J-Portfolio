@@ -97,10 +97,10 @@ const ArticleCard = ({ article, index }: { article: typeof articles[0]; index: n
             />
             <div className="absolute top-4 left-4">
               <span
-                className="px-3 py-1 rounded-full text-xs font-semibold"
+                className="px-3 py-1 rounded-full text-xs font-semibold text-foreground"
                 style={{
-                  background: `hsl(${article.color})`,
-                  color: "hsl(220 20% 4%)",
+                  backgroundColor: `hsl(${article.color})`,
+                  color: "#030404",
                 }}
               >
                 {article.category}

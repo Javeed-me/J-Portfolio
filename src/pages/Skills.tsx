@@ -1,58 +1,42 @@
 import { motion, useInView } from "framer-motion";
 import { FadeUp } from "@/components/layout/PageTransition";
-import { useRef, useEffect, useState } from "react";
+import { useRef } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Float, Sphere, MeshDistortMaterial } from "@react-three/drei";
 import * as THREE from "three";
 import { Suspense } from "react";
 
+const levelMap = {
+  Beginner: 20,
+  Intermediate: 40,
+  Advanced: 60,
+  Expert: 80,
+  Master: 100,
+};
+
+type SkillLevel = keyof typeof levelMap;
+
 const skills = [
-  { name: "React / Next.js", level: 95, color: "61 93% 50%" },
-  { name: "TypeScript", level: 90, color: "210 100% 50%" },
-  { name: "Node.js", level: 88, color: "120 50% 45%" },
-  { name: "Python", level: 85, color: "45 90% 50%" },
-  { name: "Three.js / WebGL", level: 82, color: "280 70% 50%" },
-  { name: "PostgreSQL / MongoDB", level: 85, color: "24 95% 60%" },
-  { name: "AWS / Cloud", level: 80, color: "200 90% 50%" },
-  { name: "Docker / DevOps", level: 78, color: "190 80% 50%" },
+  {name: "Python", level: "Master" as SkillLevel, color: "80 93% 80%" },
+  { name: "React", level: "Expert" as SkillLevel, color: "61 93% 50%" },
+  { name: "TypeScript", level: "Expert" as SkillLevel, color: "210 100% 50%" },
+  { name: "Node.js", level: "Advanced" as SkillLevel, color: "120 50% 45%" },
+  { name: "SQLite / MongoDB", level: "Expert" as SkillLevel, color: "24 95% 60%" },
 ];
 
 const toolsAndTech = [
-  { name: "Git", icon: "📦" },
-  { name: "Figma", icon: "🎨" },
-  { name: "VS Code", icon: "💻" },
-  { name: "Postman", icon: "📮" },
-  { name: "Jira", icon: "📋" },
-  { name: "Notion", icon: "📓" },
-  { name: "Slack", icon: "💬" },
+  { name: "Git", icon: "🔧" },
+  { name: "Cursor", icon: "💻" },
+  { name: "Postman", icon: "📡" },
+  { name: "Docker", icon: "🐳" },
   { name: "Linux", icon: "🐧" },
+  { name: "Cloud Tech", icon: "☁️" },
 ];
 
 const AnimatedSkillBar = ({ skill, index }: { skill: typeof skills[0]; index: number }) => {
   const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
-  const [count, setCount] = useState(0);
-
-  useEffect(() => {
-    if (isInView) {
-      let start = 0;
-      const end = skill.level;
-      const duration = 1500;
-      const increment = end / (duration / 16);
-
-      const timer = setInterval(() => {
-        start += increment;
-        if (start >= end) {
-          setCount(end);
-          clearInterval(timer);
-        } else {
-          setCount(Math.floor(start));
-        }
-      }, 16);
-
-      return () => clearInterval(timer);
-    }
-  }, [isInView, skill.level]);
+  const isInView = useInView(ref, { once: true, margin: "0px" });
+  const levelValue = levelMap[skill.level];
 
   return (
     <motion.div
@@ -62,20 +46,23 @@ const AnimatedSkillBar = ({ skill, index }: { skill: typeof skills[0]; index: nu
       transition={{ delay: index * 0.1, duration: 0.6 }}
       className="group"
     >
-      <div className="flex justify-between mb-2">
+      <div className="flex justify-between items-center mb-3">
         <span className="font-medium group-hover:text-primary transition-colors">
           {skill.name}
         </span>
-        <span className="text-primary font-display font-bold">{count}%</span>
+        <span className="text-primary font-display font-bold text-base ml-4">
+          {skill.level}
+        </span>
       </div>
-      <div className="h-3 bg-secondary rounded-full overflow-hidden">
+      <div className="h-2 bg-secondary rounded-full overflow-hidden relative">
         <motion.div
           className="h-full rounded-full relative"
           initial={{ width: 0 }}
-          animate={isInView ? { width: `${skill.level}%` } : {}}
-          transition={{ delay: index * 0.1 + 0.3, duration: 1, ease: "easeOut" }}
+          animate={isInView ? { width: `${levelValue}%` } : {}}
+          transition={{ delay: index * 0.1 + 0.3, duration: 1.2, ease: "easeOut" }}
           style={{
             background: `linear-gradient(90deg, hsl(${skill.color}), hsl(${skill.color} / 0.7))`,
+            boxShadow: `0 0 12px hsl(${skill.color} / 0.5)`,
           }}
         >
           <motion.div
@@ -137,11 +124,7 @@ const Skills = () => {
     <main className="min-h-screen pt-32 pb-24">
       <div className="container mx-auto px-6 lg:px-12">
         <div className="text-center mb-16">
-          <FadeUp>
-            <span className="text-primary font-display font-semibold mb-4 block">
-              Expertise
-            </span>
-          </FadeUp>
+          
           <FadeUp delay={0.1}>
             <h1 className="font-display text-4xl md:text-6xl font-bold mb-6">
               My <span className="gradient-text">Skills</span>
@@ -149,56 +132,64 @@ const Skills = () => {
           </FadeUp>
           <FadeUp delay={0.2}>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Technologies and tools I use to bring ideas to life
+              Technologies and tools I use to bring ideas to life.
             </p>
           </FadeUp>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
-          {/* Skills bars */}
-          <div className="space-y-6">
+        <div className="grid lg:grid-cols-2 gap-16 items-start relative">
+          {/* Skills bars - Left side */}
+          <div className="space-y-8">
             {skills.map((skill, i) => (
               <AnimatedSkillBar key={skill.name} skill={skill} index={i} />
             ))}
           </div>
 
-          {/* 3D Sphere */}
-          <FadeUp delay={0.3}>
-            <div className="glass rounded-3xl p-8 overflow-hidden">
-              <SkillSphere />
-            </div>
-          </FadeUp>
-        </div>
+          {/* Divider line - Optional subtle separator */}
+          <div className="hidden lg:block absolute left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-primary/20 to-transparent" />
 
-        {/* Tools grid */}
-        <div className="mt-24">
-          <FadeUp>
-            <h2 className="font-display text-3xl font-bold text-center mb-12">
-              Tools & Technologies
-            </h2>
-          </FadeUp>
+          {/* Tools grid - Right side */}
+          <div className="lg:pl-8">
+            <FadeUp delay={0.3}>
+              <h2 className="font-display text-3xl font-bold mb-8">
+                Tools & Technologies
+              </h2>
+            </FadeUp>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {toolsAndTech.map((tool, i) => (
-              <motion.div
-                key={tool.name}
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: i * 0.1 }}
-                whileHover={{ scale: 1.05, y: -5 }}
-                className="glass rounded-xl p-6 text-center group cursor-pointer"
-              >
+            <div className="grid grid-cols-3 gap-4">
+              {toolsAndTech.map((tool, i) => (
                 <motion.div
-                  className="text-4xl mb-3"
-                  whileHover={{ scale: 1.2, rotate: 10 }}
+                  key={tool.name}
+                  initial={{ opacity: 0, scale: 0.9, y: 20 }}
+                  animate={{ opacity: 1, scale: 1, y: 0 }}
+                  transition={{ delay: i * 0.08 + 0.2, duration: 0.5 }}
+                  whileHover={{ scale: 1.08, y: -8 }}
+                  className="group"
                 >
-                  {tool.icon}
+                  <div className="relative glass rounded-2xl p-6 text-center cursor-pointer overflow-hidden h-full flex flex-col items-center justify-center min-h-[140px]">
+                    {/* Gradient background on hover */}
+                    <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-accent/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    
+                    {/* Content */}
+                    <div className="relative z-10">
+                      <motion.div
+                        className="text-5xl mb-3 inline-block"
+                        whileHover={{ scale: 1.3, rotate: 5 }}
+                        transition={{ type: "spring", stiffness: 300 }}
+                      >
+                        {tool.icon}
+                      </motion.div>
+                      <h3 className="font-medium text-sm group-hover:text-primary transition-colors">
+                        {tool.name}
+                      </h3>
+                    </div>
+                    
+                    {/* Border animation on hover */}
+                    <div className="absolute inset-0 rounded-2xl border border-primary/20 group-hover:border-primary/60 transition-all duration-300" />
+                  </div>
                 </motion.div>
-                <span className="font-medium group-hover:text-primary transition-colors">
-                  {tool.name}
-                </span>
-              </motion.div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
       </div>

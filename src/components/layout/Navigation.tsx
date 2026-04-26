@@ -7,9 +7,7 @@ const navItems = [
   { path: "/", label: "Home" },
   { path: "/projects", label: "Projects" },
   { path: "/skills", label: "Skills" },
-  { path: "/resume", label: "Resume" },
-  { path: "/articles", label: "Articles" },
-  { path: "/profiles", label: "Profiles" },
+  { path: "/resume", label: "Experience" },
   { path: "/contact", label: "Contact" },
 ];
 
@@ -24,20 +22,20 @@ export const Navigation = () => {
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-        className="fixed top-0 left-0 right-0 z-50 hidden md:block"
+        className="fixed top-0 left-0 right-0 z-50 hidden md:block w-full"
       >
-        <div className="mx-auto max-w-7xl px-6 py-4">
-          <div className="glass rounded-2xl px-6 py-3 flex items-center justify-between">
-            <Link to="/" className="font-display text-xl font-bold gradient-text-warm">
+        <div className="container mx-auto px-6 lg:px-12 py-6">
+          <div className="glass rounded-2xl px-8 py-4 flex items-center justify-between">
+            <Link to="/" className="font-display text-2xl font-bold gradient-text-warm">
               Portfolio
             </Link>
             
-            <div className="flex items-center gap-1">
+            <div className="flex items-center gap-2">
               {navItems.map((item) => (
                 <Link
                   key={item.path}
                   to={item.path}
-                  className="relative px-4 py-2 text-sm font-medium transition-colors hover:text-primary"
+                  className="relative px-5 py-3 text-base font-medium transition-colors hover:text-primary"
                 >
                   {location.pathname === item.path && (
                     <motion.div
@@ -51,9 +49,9 @@ export const Navigation = () => {
               ))}
             </div>
 
-            <Link
+            {/* <Link
               to="/contact"
-              className="relative overflow-hidden rounded-full bg-primary px-5 py-2 text-sm font-semibold text-primary-foreground transition-all hover:scale-105"
+              className="relative overflow-hidden rounded-full bg-primary px-6 py-3 text-base font-semibold text-primary-foreground transition-all hover:scale-105"
             >
               <span className="relative z-10">Hire Me</span>
               <motion.div
@@ -62,7 +60,7 @@ export const Navigation = () => {
                 transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
                 style={{ width: "200%" }}
               />
-            </Link>
+            </Link> */}
           </div>
         </div>
       </motion.nav>

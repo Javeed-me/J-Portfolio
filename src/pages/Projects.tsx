@@ -7,63 +7,43 @@ import { useState } from "react";
 const projects = [
   {
     id: 1,
-    title: "E-Commerce Platform",
-    description: "A full-stack e-commerce solution with real-time inventory management and AI-powered recommendations.",
-    image: "/placeholder.svg",
-    tags: ["React", "Node.js", "MongoDB", "AI"],
+    title: "Simple-Triage-Navigator",
+    description: "A Python Healthcare solution with real-time and AI-powered recommendations.",
+    image: "/images/simple.png",
+    tags: ["Python","React","LLM", "SQLite"],
     color: "24 95% 60%",
-    github: "https://github.com",
-    live: "https://example.com",
+    github: "https://github.com/Javeed-me/Simple-Triage-Navigator",
+    live: "",  
   },
   {
     id: 2,
-    title: "AI Dashboard",
-    description: "Analytics dashboard with machine learning insights and interactive data visualizations.",
-    image: "/placeholder.svg",
-    tags: ["TypeScript", "Python", "D3.js", "TensorFlow"],
-    color: "280 70% 50%",
-    github: "https://github.com",
-    live: "https://example.com",
+    title: "Niralverse",
+    description: "Niralverse is a lightweight web-based platform designed to conduct live debugging competitions in coding events and hackathons.",
+    image: "/images/niral.avif",
+    tags: ["HTML", "CSS3", "JavaScript", "Vercel", "API"],
+    color: "210 100% 60%",
+    github: "https://github.com/Javeed-me/Niralverse",
+    live: "https://niralverse.vercel.app/",
   },
   {
     id: 3,
-    title: "Social Network App",
-    description: "Real-time social platform with messaging, stories, and advanced privacy controls.",
-    image: "/placeholder.svg",
-    tags: ["React Native", "Firebase", "GraphQL"],
-    color: "210 100% 60%",
-    github: "https://github.com",
-    live: "https://example.com",
+    title: "Antivirus-Webtool-Prototype",
+    description: "The Antivirus Webtool Prototype is an application designed to simulate how antivirus solutions can be integrated into a web-based environment. It provides users with an interactive interface to test, analyze, and visualize security checks in real time.",
+    image: "/images/anti.jpg",
+    tags: ["HTML5", "CSS3", "Python", "Firebase"],
+    color: "280 70% 50%",
+    github: "https://github.com/Javeed-me/Antivirus-Webtool-Prototype-frontend",
+    live: "",
   },
   {
     id: 4,
-    title: "Blockchain DeFi",
-    description: "Decentralized finance application for crypto trading and yield farming.",
-    image: "/placeholder.svg",
-    tags: ["Solidity", "Web3.js", "React", "Ethereum"],
-    color: "150 70% 50%",
-    github: "https://github.com",
-    live: "https://example.com",
-  },
-  {
-    id: 5,
-    title: "Health & Fitness App",
-    description: "Personal health tracker with workout plans, nutrition logging, and progress analytics.",
-    image: "/placeholder.svg",
-    tags: ["Flutter", "Dart", "Firebase", "HealthKit"],
-    color: "340 70% 50%",
-    github: "https://github.com",
-    live: "https://example.com",
-  },
-  {
-    id: 6,
-    title: "AR Experience",
-    description: "Augmented reality application for interactive product visualization and gaming.",
-    image: "/placeholder.svg",
-    tags: ["Unity", "ARKit", "C#", "Blender"],
-    color: "45 90% 50%",
-    github: "https://github.com",
-    live: "https://example.com",
+    title: "To-Do-task",
+    description: "A simple and efficient task management application built with React Native and Firebase.",
+    image: "/images/tasktodo.avif",
+    tags: ["React Native", "Node.js", "JavaScript"],
+    color: "210 100% 60%",
+    github: "https://github.com/Javeed-me/To-Do-task",
+    live: "https://to-do-task-peach.vercel.app/",
   },
 ];
 
@@ -166,20 +146,14 @@ const Projects = () => {
     <main className="min-h-screen pt-32 pb-24">
       <div className="container mx-auto px-6 lg:px-12">
         <div className="text-center mb-16">
-          <FadeUp>
-            <span className="text-primary font-display font-semibold mb-4 block">
-              My Work
-            </span>
-          </FadeUp>
           <FadeUp delay={0.1}>
             <h1 className="font-display text-4xl md:text-6xl font-bold mb-6">
-              Featured <span className="gradient-text">Projects</span>
+              My <span className="gradient-text">Projects</span>
             </h1>
           </FadeUp>
           <FadeUp delay={0.2}>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              A collection of projects that showcase my skills in full-stack development, 
-              UI/UX design, and creative problem-solving.
+              Projects showcasing my skills in python Full-Stack, AI, LLM, UI/UX, and creative problem-solving with end to end.
             </p>
           </FadeUp>
         </div>
