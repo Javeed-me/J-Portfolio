@@ -2,10 +2,11 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import { HashRouter, Routes, Route, useLocation } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 import { Navigation } from "@/components/layout/Navigation";
 import { GradientBackground } from "@/components/layout/GradientBackground";
+
 import Index from "./pages/Index";
 import Projects from "./pages/Projects";
 import Skills from "./pages/Skills";
@@ -37,16 +38,14 @@ const App = () => (
     <TooltipProvider>
       <Toaster />
       <Sonner />
-      <BrowserRouter
-        future={{
-          v7_startTransition: true,
-          v7_relativeSplatPath: true,
-        }}
-      >
+
+      {/* ✅ FIXED: Using HashRouter instead of BrowserRouter */}
+      <HashRouter>
         <GradientBackground />
         <Navigation />
         <AnimatedRoutes />
-      </BrowserRouter>
+      </HashRouter>
+
     </TooltipProvider>
   </QueryClientProvider>
 );
