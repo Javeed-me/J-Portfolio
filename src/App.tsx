@@ -39,7 +39,6 @@ const App = () => (
       <Toaster />
       <Sonner />
 
-      {/* ✅ FIXED: Using HashRouter instead of BrowserRouter */}
       <HashRouter>
         <GradientBackground />
         <Navigation />

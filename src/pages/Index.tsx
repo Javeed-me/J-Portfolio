@@ -125,7 +125,7 @@ const Hero = () => {
                 {/* Image */}
                 <div className="absolute inset-1 rounded-3xl bg-background overflow-hidden">
                   <img
-                    src="/images/myimage.png"
+                    src="images/myimage.png"
                     alt="Profile"
                     className="w-full h-full object-cover"
                   />
