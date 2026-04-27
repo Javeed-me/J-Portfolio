@@ -1,7 +1,3 @@
-import { Toaster } from "@/components/ui/toaster";
-import { Toaster as Sonner } from "@/components/ui/sonner";
-import { TooltipProvider } from "@/components/ui/tooltip";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { HashRouter, Routes, Route, useLocation } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 import { Navigation } from "@/components/layout/Navigation";
@@ -13,8 +9,6 @@ import Skills from "./pages/Skills";
 import Resume from "./pages/Resume";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
-
-const queryClient = new QueryClient();
 
 const AnimatedRoutes = () => {
   const location = useLocation();
@@ -34,19 +28,11 @@ const AnimatedRoutes = () => {
 };
 
 const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
-
-      <HashRouter>
-        <GradientBackground />
-        <Navigation />
-        <AnimatedRoutes />
-      </HashRouter>
-
-    </TooltipProvider>
-  </QueryClientProvider>
+  <HashRouter>
+    <GradientBackground />
+    <Navigation />
+    <AnimatedRoutes />
+  </HashRouter>
 );
 
 export default App;

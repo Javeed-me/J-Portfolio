@@ -8,9 +8,9 @@ import {
 import { useState } from "react";
 
 const contactInfo = [
-  { icon: Mail, label: "Email", value: "javeed3082gmail.com", href: "mailto:javeed3082gmail.com" },
-  { icon: Phone, label: "Phone", value: "+91 9943086228", href: "tel:+91 9943086228" },
-  { icon: MapPin, label: "Location", value: "Chennai, TN", href: "#" },
+  { icon: Mail, label: "Email", value: "javeed3082@gmail.com", href: "mailto:javeed3082@gmail.com" },
+  { icon: Phone, label: "Phone", value: "+91 99430 86228", href: "tel:+919943086228" },
+  { icon: MapPin, label: "Location", value: "Chennai, TN", href: "https://www.google.com/maps/search/?api=1&query=Chennai%2C%20Tamil%20Nadu" },
 ];
 
 const socialLinks = [
@@ -29,8 +29,12 @@ const Contact = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission
-    alert("Submitted!");
+    const subject = encodeURIComponent(formData.subject || `Portfolio enquiry from ${formData.name || "visitor"}`);
+    const body = encodeURIComponent(
+      `Name: ${formData.name}\nEmail: ${formData.email}\n\n${formData.message}`,
+    );
+
+    window.location.href = `mailto:javeed3082@gmail.com?subject=${subject}&body=${body}`;
   };
 
   return (
@@ -56,6 +60,8 @@ const Contact = () => {
                 <motion.a
                   key={info.label}
                   href={info.href}
+                  target={info.href.startsWith("http") ? "_blank" : undefined}
+                  rel={info.href.startsWith("http") ? "noopener noreferrer" : undefined}
                   initial={{ opacity: 0, x: -30 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.3 + i * 0.1 }}
@@ -128,6 +134,9 @@ const Contact = () => {
                     </motion.label>
                     <motion.input
                       type={field.type}
+                      name={field.name}
+                      required
+                      autoComplete={field.name === "email" ? "email" : field.name}
                       value={formData[field.name as keyof typeof formData]}
                       onChange={(e) =>
                         setFormData({ ...formData, [field.name]: e.target.value })
@@ -151,6 +160,8 @@ const Contact = () => {
                     Your Message
                   </motion.label>
                   <motion.textarea
+                    name="message"
+                    required
                     value={formData.message}
                     onChange={(e) =>
                       setFormData({ ...formData, message: e.target.value })

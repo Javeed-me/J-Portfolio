@@ -51,18 +51,6 @@
     --gradient-mid: 280 70% 50%;
     --gradient-end: 210 100% 60%;
 
-    /* Light section */
-    --light-bg: 40 30% 96%;
-    --light-foreground: 220 20% 10%;
-    
-    --sidebar-background: 220 20% 6%;
-    --sidebar-foreground: 0 0% 98%;
-    --sidebar-primary: 24 95% 60%;
-    --sidebar-primary-foreground: 220 20% 4%;
-    --sidebar-accent: 220 20% 12%;
-    --sidebar-accent-foreground: 0 0% 98%;
-    --sidebar-border: 220 15% 18%;
-    --sidebar-ring: 24 95% 60%;
   }
 }
 
@@ -124,33 +112,6 @@
                 0 0 80px -20px hsl(var(--glow-primary) / 0.3);
   }
 
-  .glow-secondary {
-    box-shadow: 0 0 40px -10px hsl(var(--glow-secondary) / 0.5),
-                0 0 80px -20px hsl(var(--glow-secondary) / 0.3);
-  }
-
-  .glow-blue {
-    box-shadow: 0 0 40px -10px hsl(var(--glow-blue) / 0.5),
-                0 0 80px -20px hsl(var(--glow-blue) / 0.3);
-  }
-
-  .glow-border {
-    @apply relative;
-  }
-
-  .glow-border::before {
-    content: '';
-    @apply absolute inset-0 rounded-[inherit] -z-10;
-    background: linear-gradient(
-      135deg,
-      hsl(var(--gradient-start)),
-      hsl(var(--gradient-mid)),
-      hsl(var(--gradient-end))
-    );
-    filter: blur(20px);
-    opacity: 0.5;
-  }
-
   /* Animated gradient background */
   .gradient-bg-animated {
     background: linear-gradient(
@@ -188,28 +149,6 @@
     background: hsl(var(--glow-blue));
   }
 
-  /* Text shadows */
-  .text-glow {
-    text-shadow: 0 0 30px hsl(var(--glow-primary) / 0.5);
-  }
-
-  /* 3D card effect */
-  .card-3d {
-    transform-style: preserve-3d;
-    perspective: 1000px;
-  }
-
-  /* Light section styling */
-  .light-section {
-    background: hsl(var(--light-bg));
-    color: hsl(var(--light-foreground));
-  }
-
-  /* Magnetic button effect */
-  .magnetic-hover {
-    transition: transform 0.3s cubic-bezier(0.23, 1, 0.32, 1);
-  }
-
   /* Smooth scrollbar */
   ::-webkit-scrollbar {
     width: 6px;
@@ -229,10 +168,3 @@
   }
 }
 
-/* Page transition overlay */
-.page-transition-overlay {
-  position: fixed;
-  inset: 0;
-  z-index: 100;
-  pointer-events: none;
-}

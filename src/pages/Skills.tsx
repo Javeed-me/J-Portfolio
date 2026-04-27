@@ -3,6 +3,7 @@ import { FadeUp } from "@/components/layout/PageTransition";
 import { useRef } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Float, Sphere, MeshDistortMaterial } from "@react-three/drei";
+import { Bot, Cloud, Container, GitBranch, Send, Terminal } from "lucide-react";
 import * as THREE from "three";
 import { Suspense } from "react";
 
@@ -25,12 +26,12 @@ const skills = [
 ];
 
 const toolsAndTech = [
-  { name: "Git", icon: "🔧" },
-  { name: "Cursor", icon: "💻" },
-  { name: "Postman", icon: "📡" },
-  { name: "Docker", icon: "🐳" },
-  { name: "Linux", icon: "🐧" },
-  { name: "Cloud Tech", icon: "☁️" },
+  { name: "Git", icon: GitBranch },
+  { name: "Cursor", icon: Bot },
+  { name: "Postman", icon: Send },
+  { name: "Docker", icon: Container },
+  { name: "Linux", icon: Terminal },
+  { name: "Cloud Tech", icon: Cloud },
 ];
 
 const AnimatedSkillBar = ({ skill, index }: { skill: typeof skills[0]; index: number }) => {
@@ -157,38 +158,44 @@ const Skills = () => {
             </FadeUp>
 
             <div className="grid grid-cols-3 gap-4">
-              {toolsAndTech.map((tool, i) => (
-                <motion.div
-                  key={tool.name}
-                  initial={{ opacity: 0, scale: 0.9, y: 20 }}
-                  animate={{ opacity: 1, scale: 1, y: 0 }}
-                  transition={{ delay: i * 0.08 + 0.2, duration: 0.5 }}
-                  whileHover={{ scale: 1.08, y: -8 }}
-                  className="group"
-                >
-                  <div className="relative glass rounded-2xl p-6 text-center cursor-pointer overflow-hidden h-full flex flex-col items-center justify-center min-h-[140px]">
-                    {/* Gradient background on hover */}
-                    <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-accent/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                    
-                    {/* Content */}
-                    <div className="relative z-10">
-                      <motion.div
-                        className="text-5xl mb-3 inline-block"
-                        whileHover={{ scale: 1.3, rotate: 5 }}
-                        transition={{ type: "spring", stiffness: 300 }}
-                      >
-                        {tool.icon}
-                      </motion.div>
-                      <h3 className="font-medium text-sm group-hover:text-primary transition-colors">
-                        {tool.name}
-                      </h3>
+              {toolsAndTech.map((tool, i) => {
+                const Icon = tool.icon;
+
+                return (
+                  <motion.div
+                    key={tool.name}
+                    initial={{ opacity: 0, scale: 0.9, y: 20 }}
+                    animate={{ opacity: 1, scale: 1, y: 0 }}
+                    transition={{ delay: i * 0.08 + 0.2, duration: 0.5 }}
+                    whileHover={{ scale: 1.08, y: -8 }}
+                    className="group"
+                  >
+                    <div className="relative glass rounded-2xl p-6 text-center cursor-pointer overflow-hidden h-full flex flex-col items-center justify-center min-h-[140px]">
+                      {/* Gradient background on hover */}
+                      <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-accent/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+
+                      {/* Content */}
+                      <div className="relative z-10">
+                        <motion.div
+                          className="text-5xl mb-3 inline-block"
+                          whileHover={{ scale: 1.3, rotate: 5 }}
+                          transition={{ type: "spring", stiffness: 300 }}
+                        >
+                          <span className="flex h-16 w-16 items-center justify-center rounded-full border border-primary/30 bg-primary/10 text-primary">
+                            <Icon size={30} strokeWidth={2.2} aria-hidden="true" />
+                          </span>
+                        </motion.div>
+                        <h3 className="font-medium text-sm group-hover:text-primary transition-colors">
+                          {tool.name}
+                        </h3>
+                      </div>
+
+                      {/* Border animation on hover */}
+                      <div className="absolute inset-0 rounded-2xl border border-primary/20 group-hover:border-primary/60 transition-all duration-300" />
                     </div>
-                    
-                    {/* Border animation on hover */}
-                    <div className="absolute inset-0 rounded-2xl border border-primary/20 group-hover:border-primary/60 transition-all duration-300" />
-                  </div>
-                </motion.div>
-              ))}
+                  </motion.div>
+                );
+              })}
             </div>
           </div>
         </div>

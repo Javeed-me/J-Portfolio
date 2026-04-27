@@ -7,16 +7,26 @@ import { useState } from "react";
 const projects = [
   {
     id: 1,
-    title: "Simple-Triage-Navigator",
-    description: "A Python Healthcare solution with real-time and AI-powered recommendations.",
+    title: "HealthSync",
+    description: "A Healthcare solution with real-time and AI-powered recommendations.",
     image: "images/simple.png",
     tags: ["Python","React","LLM", "SQLite"],
     color: "24 95% 60%",
-    github: "https://github.com/Javeed-me/Simple-Triage-Navigator",
+    github: "https://github.com/Javeed-me/HealthSync",
     live: "",  
   },
   {
     id: 2,
+    title: "HealthSync Data Pipeline",
+    description: "A healthcare data engineering platform for real-time processing, validation, and analytics-ready insights.",
+    image: "images/pipeline.png",
+    tags: ["Python","Streamlit","SQLite"],
+    color: "24 95% 60%",
+    github: "https://github.com/Javeed-me/HealthSync-Data-Pipeline",
+    live: "",  
+  },
+  {
+    id: 3,
     title: "Niralverse",
     description: "Niralverse is a lightweight web-based platform designed to conduct live debugging competitions in coding events and hackathons.",
     image: "images/niral.avif",
@@ -26,7 +36,7 @@ const projects = [
     live: "https://niralverse.vercel.app/",
   },
   {
-    id: 3,
+    id: 4,
     title: "Antivirus-Webtool-Prototype",
     description: "The Antivirus Webtool Prototype is an application designed to simulate how antivirus solutions can be integrated into a web-based environment. It provides users with an interactive interface to test, analyze, and visualize security checks in real time.",
     image: "images/anti.jpg",
@@ -36,7 +46,7 @@ const projects = [
     live: "",
   },
   {
-    id: 4,
+    id: 5,
     title: "To-Do-task",
     description: "A simple and efficient task management application built with React Native and Firebase.",
     image: "images/tasktodo.avif",
@@ -87,22 +97,26 @@ const ProjectCard = ({ project, index }: { project: typeof projects[0]; index: n
                 href={project.github}
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label={`${project.title} GitHub repository`}
                 className="p-3 glass rounded-full hover:bg-primary/20 transition-colors"
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
               >
                 <Github size={24} />
               </motion.a>
-              <motion.a
-                href={project.live}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-3 glass rounded-full hover:bg-primary/20 transition-colors"
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <ExternalLink size={24} />
-              </motion.a>
+              {project.live && (
+                <motion.a
+                  href={project.live}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`${project.title} live demo`}
+                  className="p-3 glass rounded-full hover:bg-primary/20 transition-colors"
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <ExternalLink size={24} />
+                </motion.a>
+              )}
             </motion.div>
           </div>
 

@@ -77,7 +77,7 @@ const Resume = () => {
                   </h3>
                   <div className="flex items-center gap-2 text-muted-foreground text-sm mb-3">
                     <span>{exp.company}</span>
-                    <span>•</span>
+                    <span>-</span>
                     <span className="flex items-center gap-1">
                       <Calendar size={14} />
                       {exp.period}
@@ -113,7 +113,7 @@ const Resume = () => {
                   </h3>
                   <div className="flex items-center gap-2 text-muted-foreground text-sm mb-3">
                     <span>{edu.institution}</span>
-                    <span>•</span>
+                    <span>-</span>
                     <span>{edu.period}</span>
                   </div>
                   <p className="text-primary font-medium">{edu.grade}</p>
